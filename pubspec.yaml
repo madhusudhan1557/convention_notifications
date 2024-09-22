@@ -1,8 +1,7 @@
 name: convention_notifications
 description: "Customizable notification pacakge for your projects"
 version: 0.0.1
-homepage:
-
+homepage: https://github.com/madhusudhan1557/convention_notifications  
 environment:
   sdk: ^3.5.3
   flutter: '>=3.3.0'
