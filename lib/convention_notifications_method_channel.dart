@@ -4,14 +4,39 @@ import 'package:flutter/services.dart';
 import 'convention_notifications_platform_interface.dart';
 
 /// An implementation of [ConventionNotificationsPlatform] that uses method channels.
-class MethodChannelConventionNotifications extends ConventionNotificationsPlatform {
+class MethodChannelConventionNotifications
+    extends ConventionNotificationsPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
   final methodChannel = const MethodChannel('convention_notifications');
-
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
+  }
+
+  @override
+  Future<void> showNotification(
+      String title, String description, String payload) async {
+       try {
+      await methodChannel.invokeMethod('showNotification', {
+        'title': title,
+        'description': description,
+        'payload': payload,
+      });
+    } on PlatformException catch (e) {
+      throw Exception("Error showing notification: ${e.message}");
+    }
+  }
+
+  @override
+  void setNotificationTapHandler(Function(String) onTap) async {
+     methodChannel.setMethodCallHandler((call) async {
+      if (call.method == 'onNotificationTap') {
+        String payload = call.arguments as String;
+        onTap(payload); 
+      }
+    });
   }
 }

@@ -10,6 +10,17 @@ class MockConventionNotificationsPlatform
 
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+  
+  @override
+  Future<void> setNotificationTapHandler(Function(String p1) onTap) {
+  
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<void> showNotification(String title, String description, String payload) {
+    throw UnimplementedError();
+  }
 }
 
 void main() {

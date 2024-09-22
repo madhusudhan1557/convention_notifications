@@ -8,7 +8,8 @@ abstract class ConventionNotificationsPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static ConventionNotificationsPlatform _instance = MethodChannelConventionNotifications();
+  static ConventionNotificationsPlatform _instance =
+      MethodChannelConventionNotifications();
 
   /// The default instance of [ConventionNotificationsPlatform] to use.
   ///
@@ -24,6 +25,15 @@ abstract class ConventionNotificationsPlatform extends PlatformInterface {
   }
 
   Future<String?> getPlatformVersion() {
+    throw UnimplementedError('platformVersion() has not been implemented.');
+  }
+
+  Future<void> showNotification(
+      String title, String description, String payload) {
+    throw UnimplementedError('platformVersion() has not been implemented.');
+  }
+
+  void setNotificationTapHandler(Function(String) onTap) {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 }
