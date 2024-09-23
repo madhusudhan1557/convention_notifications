@@ -25,8 +25,8 @@ class NotificationManagerKt(private val context: Context, private val methodChan
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = context.getString(R.string.channel_name)
-            val descriptionText = context.getString(R.string.channel_description)
+            val name = context.getString("Channel Name")
+            val descriptionText = context.getString("Channel Descriptions")
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
@@ -41,8 +41,7 @@ class NotificationManagerKt(private val context: Context, private val methodChan
     fun showNotification(call: MethodCall, result: MethodChannel.Result) {
         val title = call.argument<String>("title") ?: "Default Title"
         val description = call.argument<String>("description") ?: "Default Description"
-        val payload = call.argument<String>("payload") ?: ""
-
+        val payload = call.argument<String>("payload") ?: "" 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 result.error("PERMISSION_DENIED", "Notification permission not granted", null)
@@ -61,7 +60,7 @@ class NotificationManagerKt(private val context: Context, private val methodChan
         )
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(mipmap.ic_launcher)
             .setContentTitle(title)
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
