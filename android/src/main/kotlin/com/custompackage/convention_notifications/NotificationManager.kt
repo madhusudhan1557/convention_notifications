@@ -61,7 +61,7 @@ class NotificationManagerKt(private val context: Context, private val methodChan
         )
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.notification_icon)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle(title)
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
