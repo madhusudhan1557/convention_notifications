@@ -1,0 +1,4 @@
+<resources>
+    <string name="channel_name">Convention Notifications</string>
+    <string name="channel_description">Notification channel for convention updates</string>
+</resources>
