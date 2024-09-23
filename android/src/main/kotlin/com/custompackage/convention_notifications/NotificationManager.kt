@@ -25,8 +25,8 @@ class NotificationManagerKt(private val context: Context, private val methodChan
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = context.getString("Channel Name")
-            val descriptionText = context.getString("Channel Descriptions")
+            val name = context.getString(R.string.channel_name)
+            val descriptionText = context.getString(R.string.channel_description)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
@@ -60,7 +60,7 @@ class NotificationManagerKt(private val context: Context, private val methodChan
         )
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(mipmap.ic_launcher)
+            .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setContentTitle(title)
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
