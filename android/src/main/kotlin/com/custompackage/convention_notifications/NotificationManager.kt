@@ -52,6 +52,7 @@ class NotificationManagerKt(private val context: Context, private val methodChan
         // Create an intent with the payload
         val intent = Intent(context, NotificationReceiver::class.java).apply {
             putExtra("payload", payload)  // Add the payload to the intent
+            println(payload)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
 
