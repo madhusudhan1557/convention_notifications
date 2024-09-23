@@ -24,6 +24,7 @@ class MethodChannelConventionNotifications
         'title': title,
         'description': description,
         'payload': payload,
+        'icon' : icon,
       });
     } on PlatformException catch (e) {
       throw Exception("Error showing notification: ${e.message}");
