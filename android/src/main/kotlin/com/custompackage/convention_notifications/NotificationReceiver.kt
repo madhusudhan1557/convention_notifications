@@ -9,7 +9,7 @@ class NotificationReceiver(private val methodChannel: MethodChannel) : Broadcast
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val payload = intent?.getStringExtra("payload")
-
+         println(payload)
         payload?.let {
             methodChannel.invokeMethod("onNotificationTap", it)
         }
