@@ -42,6 +42,21 @@ class NotificationManagerKt(private val context: Context, private val methodChan
         val title = call.argument<String>("title") ?: "Default Title"
         val description = call.argument<String>("description") ?: "Default Description"
         val payload = call.argument<String>("payload") ?: "" 
+        val iconName = call.argument<String>("icon") ?: "ic_launcher" // Default icon name
+
+        // Try to get the resource ID from mipmap first
+        var iconResourceId = context.resources.getIdentifier(iconName, "mipmap", context.packageName)
+
+        // If not found, try drawable
+        if (iconResourceId == 0) {
+            iconResourceId = context.resources.getIdentifier(iconName, "drawable", context.packageName)
+        }
+
+        // Fallback to default icon if still not found
+        if (iconResourceId == 0) {
+            iconResourceId = android.R.drawable.ic_dialog_info
+        }
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 result.error("PERMISSION_DENIED", "Notification permission not granted", null)
@@ -61,7 +76,7 @@ class NotificationManagerKt(private val context: Context, private val methodChan
         )
 
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setSmallIcon(iconResourceId)
             .setContentTitle(title)
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
