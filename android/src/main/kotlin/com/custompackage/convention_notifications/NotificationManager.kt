@@ -73,7 +73,6 @@ class NotificationManagerKt(private val context: Context, private val methodChan
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
-            .setAllowSystemGeneratedContextualActions()
             .setAutoCancel(true)
 
         with(NotificationManagerCompat.from(context)) {
