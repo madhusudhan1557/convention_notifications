@@ -29,11 +29,11 @@ abstract class ConventionNotificationsPlatform extends PlatformInterface {
   }
 
   Future<void> showNotification(
-      String title, String description, String payload) {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+      { required String title, required String description, String? payload}) {
+    throw UnimplementedError('showNotification() has not been implemented.');
   }
 
   void setNotificationTapHandler(Function(String) onTap) {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+    throw UnimplementedError('Notification Tap handler() has not been implemented.');
   }
 }

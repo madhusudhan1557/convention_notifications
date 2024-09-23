@@ -32,7 +32,8 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await _conventionNotificationsPlugin.getPlatformVersion() ?? 'Unknown platform version';
+          await _conventionNotificationsPlugin.getPlatformVersion() ??
+              'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -47,6 +48,20 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Future<void> showNotification(
+      {required String title,
+      required String description,
+      String? payload}) async {
+    try {
+      await _conventionNotificationsPlugin.showNotification(
+        title: title,
+        description: description,
+      );
+    } catch (e) {
+      throw (Error(), e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,8 +69,24 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          children: [
+            Center(
+              child: Text('Running on: $_platformVersion\n'),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            TextButton(
+              onPressed: () {
+                showNotification(
+                  title: "Hello World",
+                  description: "Test Decription",
+                );
+              },
+              child: const Text("Show Notificaiton"),
+            ),
+          ],
         ),
       ),
     );

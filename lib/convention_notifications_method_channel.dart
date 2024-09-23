@@ -18,7 +18,7 @@ class MethodChannelConventionNotifications
 
   @override
   Future<void> showNotification(
-      String title, String description, String payload) async {
+      { required String title, required String description, String? payload}) async {
        try {
       await methodChannel.invokeMethod('showNotification', {
         'title': title,
@@ -31,7 +31,7 @@ class MethodChannelConventionNotifications
   }
 
   @override
-  void setNotificationTapHandler(Function(String) onTap) async {
+  void setNotificationTapHandler(Function(String) onTap)  {
      methodChannel.setMethodCallHandler((call) async {
       if (call.method == 'onNotificationTap') {
         String payload = call.arguments as String;
