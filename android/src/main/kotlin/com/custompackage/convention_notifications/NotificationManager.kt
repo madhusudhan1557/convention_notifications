@@ -42,15 +42,11 @@ class NotificationManagerKt(private val context: Context, private val methodChan
         val title = call.argument<String>("title") ?: "Default Title"
         val description = call.argument<String>("description") ?: "Default Description"
         val payload = call.argument<String>("payload") ?: "" 
-        // Try to get the resource ID from mipmap first
-        val iconName = call.argument<String>("icon") ?: "ic_launcher" // Default icon name
-        // Get resource ID from mipmap
+        val iconName = call.argument<String>("icon") ?: "ic_launcher"
         var iconResourceId = context.resources.getIdentifier(iconName, "mipmap", context.packageName)
-        // Try drawable if not found in mipmap
         if (iconResourceId == 0) {
             iconResourceId = context.resources.getIdentifier(iconName, "drawable", context.packageName)
         }
-        // Fallback to default icon if still not found
         if (iconResourceId == 0) {
             iconResourceId = android.R.drawable.ic_dialog_info
         }
@@ -61,7 +57,6 @@ class NotificationManagerKt(private val context: Context, private val methodChan
             }
         }
 
-        // Create an intent with the payload
         val intent = Intent(context, NotificationReceiver::class.java).apply {
             putExtra("payload", payload)  // Add the payload to the intent
             println(payload)
@@ -78,6 +73,8 @@ class NotificationManagerKt(private val context: Context, private val methodChan
             .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
+            .setAllowGeneratedReplies()
+            .setAllowSystemGeneratedContextualActions()
             .setAutoCancel(true)
 
         with(NotificationManagerCompat.from(context)) {
