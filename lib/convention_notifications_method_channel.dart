@@ -18,7 +18,7 @@ class MethodChannelConventionNotifications
 
   @override
   Future<void> showNotification(
-      { required String title, required String description, String? payload}) async {
+      { required String title, required String description, String? payload, String? icon}) async {
        try {
       await methodChannel.invokeMethod('showNotification', {
         'title': title,

@@ -17,7 +17,7 @@ class MockConventionNotificationsPlatform
 
   @override
   Future<void> showNotification(
-      {required String title, required String description, String? payload}) {
+      {required String title, required String description, String? payload, String? icon}) {
     throw UnimplementedError();
   }
 }

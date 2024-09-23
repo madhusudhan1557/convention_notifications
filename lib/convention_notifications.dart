@@ -7,9 +7,9 @@ class ConventionNotifications {
   }
 
   Future<void> showNotification(
-      { required String title, required String description, String? payload}) async {
+      { required String title, required String description, String? payload , String? icon}) async {
     return await ConventionNotificationsPlatform.instance
-        .showNotification(title : title, description : description, payload: payload);
+        .showNotification(title : title, description : description, payload: payload, icon: icon);
   }
 
   void setNotificationTapHandler(Function(String) onTap) {
